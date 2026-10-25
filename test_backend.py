@@ -40,10 +40,14 @@ class RetailTests(unittest.TestCase):
         status,result,_=self.req(path,data,self.cookies.get(who)); self.assertEqual(status,200,(path,result)); return result
     def setUp(self):
         # Fresh data per test; server only processes each test's requests.
-        with b.connect() as db:
+        db=b.connect()
+        try:
             db.execute('PRAGMA foreign_keys=OFF')
             for table in ('sessions','attempts','audit','cash','movements','loyalty','sale_items','sales','shifts','counts','purchases','promos','members','suppliers','products','users'): db.execute('DELETE FROM '+table)
             db.execute('UPDATE settings SET earn_step=10000,point_value=100,min_margin=5,reserve=0')
+            db.commit()
+        finally:
+            db.close()
         self.password=secrets.token_urlsafe(18); self.cookies={}
         self.assertEqual(self.req('setup',{'name':'owner','password':self.password})[0],201)
         self.cookies['owner']=self.req('login',{'name':'owner','password':self.password})[2]

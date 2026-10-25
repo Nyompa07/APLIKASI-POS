@@ -43,7 +43,8 @@ def points(db,mid): return db.execute('SELECT COALESCE(SUM(delta),0) FROM loyalt
 def settings(db): return one(db,'SELECT * FROM settings WHERE id=1')
 def initialize():
     DB.parent.mkdir(parents=True,exist_ok=True)
-    with connect() as db:
+    db=connect()
+    try:
         db.execute('PRAGMA journal_mode=WAL')
         db.executescript('''
 CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY,name TEXT NOT NULL UNIQUE,role TEXT NOT NULL,salt TEXT NOT NULL,hash TEXT NOT NULL,active INTEGER NOT NULL DEFAULT 1);
@@ -66,6 +67,9 @@ CREATE TABLE IF NOT EXISTS audit(id INTEGER PRIMARY KEY,at TEXT NOT NULL,user_id
 CREATE TABLE IF NOT EXISTS settings(id INTEGER PRIMARY KEY CHECK(id=1),earn_step INTEGER NOT NULL DEFAULT 10000,point_value INTEGER NOT NULL DEFAULT 100,min_margin INTEGER NOT NULL DEFAULT 5,reserve INTEGER NOT NULL DEFAULT 0);
 INSERT OR IGNORE INTO settings(id) VALUES(1);
 ''')
+        db.commit()
+    finally:
+        db.close()
 
 def quote(db,u,d):
     allow(u,POS); lines=d.get('items'); require(isinstance(lines,list) and 0<len(lines)<=200,'Keranjang kosong atau terlalu besar.')
