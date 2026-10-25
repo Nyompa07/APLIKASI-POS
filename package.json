@@ -1,0 +1,9 @@
+{
+  "name": "nilla-daily-mart-pos",
+  "version": "0.2.0",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "test": "python3 -m unittest -v test_backend"
+  }
+}

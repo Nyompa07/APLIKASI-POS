@@ -1,0 +1,1309 @@
+MASTER PROMPT
+Pengembangan POS Nilla Daily Mart — Integrated Retail Management & AI Business Intelligence
+Salin seluruh prompt di bawah ini dan kirimkan kepada GPT Astra.
+1. PERAN DAN MISI UTAMA
+Anda bertindak sebagai tim profesional yang terdiri dari:
+1. Senior Software Architect.
+2. Full-Stack Application Developer.
+3. Retail Management Consultant.
+4. FMCG Inventory and Supply Chain Specialist.
+5. Financial Controller dan Cash Flow Analyst.
+6. Business Intelligence dan Data Analyst.
+7. Cybersecurity Specialist.
+8. UI/UX Designer.
+9. CRM, Customer Loyalty, dan Promotion Strategist.
+Tugas Anda adalah merancang dan mengembangkan aplikasi bernama POS Nilla Daily Mart untuk bisnis retail FMCG di Indonesia.
+
+Aplikasi harus dirancang sebagai sistem manajemen bisnis yang terintegrasi, aman, mudah digunakan, dan mampu mendukung pengambilan keputusan bisnis berdasarkan data.
+
+Sistem harus dapat digunakan melalui desktop, laptop, tablet, dan smartphone. Prioritaskan antarmuka yang responsif, mudah dipelajari oleh karyawan, dan cocok digunakan dalam aktivitas toko sehari-hari.
+
+Bahasa utama aplikasi adalah Bahasa Indonesia. Seluruh nilai keuangan menggunakan Rupiah (IDR), dengan format angka Indonesia dan zona waktu Asia/Makassar sebagai pengaturan awal yang dapat diubah.
+
+Jangan hanya menghasilkan desain visual atau mockup. Bangun sistem dengan logika bisnis, struktur basis data, autentikasi, otorisasi, pencatatan transaksi, laporan, dan pengujian yang sesuai dengan kebutuhan.
+
+Apabila lingkungan pengembangan mendukung pembuatan kode dan berkas aplikasi, hasilkan implementasi yang benar-benar dapat dijalankan. Jangan mengklaim aplikasi sudah siap produksi sebelum pengujian dan pemeriksaan keamanan dilakukan.
+
+Jika ada keputusan teknis yang belum ditentukan, buat asumsi yang wajar, jelaskan asumsi tersebut, dan lanjutkan pekerjaan tanpa menghentikan seluruh proses hanya untuk menanyakan hal-hal yang tidak kritis.
+2. ARSITEKTUR PENGGUNA DAN SISTEM HAK AKSES
+Sistem wajib memiliki empat jenis akun utama:
+1. Owner.
+2. Manager.
+3. Cashier atau Kasir.
+4. Warehouse Staff atau Staf Gudang.
+Gunakan prinsip Role-Based Access Control (RBAC) dan prinsip hak akses minimum (least privilege).
+
+Hak akses harus ditegakkan di backend, API, dan basis data sesuai arsitektur aplikasi. Menyembunyikan tombol atau menu di tampilan pengguna saja tidak cukup.
+
+Setiap karyawan wajib menggunakan akun masing-masing. Dilarang menggunakan satu akun secara bersama-sama untuk aktivitas operasional.
+A. Akun Owner
+Owner adalah pemilik bisnis dengan akses penuh terhadap pengawasan dan pengendalian bisnis.
+
+Owner memiliki hak akses untuk:
+
+Manajemen bisnis
+- Melihat seluruh dashboard bisnis.
+- Melihat seluruh transaksi penjualan.
+- Melihat laporan omzet, laba kotor, laba bersih, dan arus kas.
+- Melihat saldo kas, saldo rekening yang dicatat dalam sistem, piutang, utang, dan kewajiban yang jatuh tempo.
+- Melihat performa setiap kategori dan SKU.
+- Melihat kinerja seluruh akun kasir.
+- Melihat performa manager.
+- Melihat pergerakan stok seluruh produk.
+- Melihat semua hasil stock opname.
+- Melihat riwayat selisih stok dan investigasinya.
+Pengendalian persediaan
+- Melihat saldo stok aktual.
+- Membandingkan stok sistem dengan hasil penghitungan fisik.
+- Menyetujui atau menolak penyesuaian stok yang memerlukan persetujuan.
+- Melihat barang rusak, hilang, kedaluwarsa, atau mengalami penyusutan.
+- Meninjau riwayat barang masuk dan barang keluar.
+- Melihat nilai persediaan berdasarkan metode penilaian yang ditetapkan.
+- Mengatur batas stok minimum dan maksimum.
+Keuangan
+- Melihat seluruh laporan keuangan.
+- Melihat proyeksi arus kas.
+- Mengatur batas cadangan kas minimum.
+- Melihat laporan laba dan rugi.
+- Melihat utang pemasok serta jadwal pembayaran.
+- Melihat biaya operasional dan biaya nonoperasional.
+- Menyetujui transaksi keuangan tertentu berdasarkan batas otorisasi.
+- Melihat analisis kelayakan ekspansi bisnis.
+Manajemen sistem
+- Membuat, mengubah, menonaktifkan, dan mengatur hak akses pengguna.
+- Menetapkan kebijakan harga.
+- Menetapkan batas diskon.
+- Menetapkan kebijakan loyalitas pelanggan.
+- Menyetujui promo berisiko tinggi.
+- Mengatur persetujuan pembelian, pengeluaran, pengembalian dana, dan penyesuaian stok.
+- Melihat audit log seluruh aktivitas.
+- Mengatur parameter analisis dan proyeksi bisnis.
+- Melakukan ekspor laporan dan pengelolaan pencadangan data sesuai hak akses.
+Owner harus menjadi pihak yang memegang kendali atas keputusan strategis dan perubahan pengaturan yang berisiko tinggi.
+B. Akun Manager
+Manager bertanggung jawab terhadap operasional toko, pengawasan karyawan, pencapaian target, persediaan, dan efektivitas kegiatan penjualan.
+
+Manager memiliki hak akses untuk:
+
+Operasional
+- Melihat dashboard operasional.
+- Memantau penjualan harian, mingguan, dan bulanan.
+- Membandingkan omzet antarperiode.
+- Melihat performa kasir.
+- Mengawasi pembukaan dan penutupan shift.
+- Memeriksa perbedaan antara transaksi sistem dan setoran kas.
+- Menindaklanjuti transaksi yang tidak wajar.
+Persediaan
+- Melihat jumlah stok seluruh produk.
+- Melihat stok minimum dan maksimum.
+- Memantau stok menipis.
+- Melihat barang lambat terjual.
+- Melihat stok yang berisiko kedaluwarsa.
+- Mengawasi barang masuk dan keluar.
+- Membuat usulan pembelian.
+- Membuat jadwal stock opname.
+- Memeriksa hasil penghitungan stok.
+- Mengajukan penyesuaian stok untuk disetujui oleh pihak berwenang.
+Manajemen keuangan operasional
+- Melihat margin produk dan kategori sesuai kebijakan akses.
+- Memantau biaya operasional.
+- Melihat performa penjualan setelah diskon.
+- Memantau utang pemasok dan jadwal jatuh tempo jika diberikan akses.
+- Melihat proyeksi operasional dan peringatan risiko bisnis.
+- Membuat simulasi perubahan harga, diskon, biaya, dan target penjualan.
+Promosi
+- Membuat usulan promo.
+- Menjalankan promo yang telah disetujui.
+- Mengelola kampanye loyalitas sesuai batas kewenangan.
+- Melihat efektivitas promo.
+- Menghentikan promo yang berada dalam kewenangannya apabila melanggar parameter yang ditetapkan.
+Batasan Manager
+
+Manager tidak boleh secara otomatis:
+- Menghapus transaksi yang telah diselesaikan.
+- Menghapus audit log.
+- Mengubah catatan transaksi keuangan yang sudah dikunci tanpa mekanisme koreksi.
+- Menyetujui penyesuaian stok di luar batas otorisasinya.
+- Mengubah batas cadangan kas minimum yang ditetapkan owner.
+- Mengubah kebijakan keamanan sistem.
+- Mengakses akun owner.
+- Mengubah atau menghapus riwayat persetujuan.
+- Melakukan transaksi sensitif di luar batas kewenangan yang ditetapkan.
+Manager dapat menerima rekomendasi bisnis dari AI, tetapi keputusan yang memiliki risiko keuangan tinggi tetap harus mengikuti prosedur persetujuan owner.
+C. Akun Cashier atau Kasir
+Akun kasir dirancang khusus untuk melayani pelanggan dan mengelola transaksi penjualan.
+
+Kasir tidak boleh mengakses modul persediaan atau data stok.
+
+Kasir tidak boleh melihat:
+- Jumlah stok aktual.
+- Riwayat pergerakan stok.
+- Hasil stock opname.
+- Stok minimum dan maksimum.
+- Jumlah barang yang diterima gudang.
+- Harga pembelian dari pemasok.
+- Nilai persediaan.
+- Margin keuntungan.
+- Data utang pemasok.
+- Laporan pembelian.
+- Analisis kehilangan barang.
+- Audit log yang bersifat internal.
+- Dashboard keuangan dan analitik manajemen.
+- Data sensitif milik owner atau manager.
+Kasir juga tidak boleh melakukan penyesuaian stok, membuat purchase order, menerima pembelian ke dalam persediaan, atau melakukan transfer stok.
+
+Kasir boleh mengakses fungsi berikut:
+1. Login menggunakan akun pribadi.
+2. Membuka shift kasir.
+3. Memindai barcode.
+4. Memasukkan produk ke keranjang transaksi.
+5. Melihat nama produk, harga jual, dan jumlah barang yang dibeli pelanggan.
+6. Menerapkan promo yang telah disetujui sistem.
+7. Mendaftarkan pelanggan sebagai member sesuai prosedur.
+8. Memproses penukaran poin yang diizinkan.
+9. Menerima pembayaran tunai dan metode pembayaran lain yang didukung.
+10. Mencetak atau mengirimkan struk.
+11. Melihat riwayat transaksi miliknya sesuai batas akses.
+12. Menutup shift dan melakukan pencocokan kas.
+Aturan penting: sistem tetap harus memvalidasi ketersediaan produk ketika transaksi diproses. Kasir dapat menerima pemberitahuan bahwa suatu produk tidak tersedia untuk dijual, tetapi tidak diperbolehkan membuka jumlah stok atau modul persediaan.
+
+Pengecekan stok pada backend harus dilakukan secara aman agar dua kasir tidak dapat menjual jumlah barang yang sama melebihi stok yang tersedia.
+
+Kasir tidak boleh:
+- Mengubah harga jual secara manual tanpa izin.
+- Memberikan diskon di luar promo yang diotorisasi.
+- Menghapus transaksi yang sudah selesai.
+- Melakukan refund tanpa persetujuan sesuai batas kewenangan.
+- Mengubah metode pembayaran transaksi yang sudah diselesaikan tanpa prosedur koreksi.
+- Mengakses akun pengguna lain.
+- Mengakses laporan laba dan rugi.
+- Mengakses laporan pembelian serta harga modal.
+Apabila terjadi pembatalan transaksi, pengembalian barang, atau perbedaan kas, sistem harus mencatat kejadian tersebut dalam audit log.
+D. Akun Warehouse Staff atau Staf Gudang
+Akun staf gudang bertugas memastikan bahwa seluruh pergerakan barang tercatat dengan benar.
+
+Staf gudang harus dapat mengakses informasi persediaan yang diperlukan untuk menjalankan tugasnya, tetapi tidak boleh secara otomatis memperoleh akses terhadap seluruh data keuangan bisnis.
+
+Fitur yang diperbolehkan:
+
+Barang masuk
+- Melihat daftar penerimaan barang yang diharapkan.
+- Melihat nomor purchase order yang berkaitan dengan penerimaan.
+- Memeriksa SKU, satuan, dan kuantitas barang.
+- Mencatat barang yang diterima.
+- Mencatat barang kurang, berlebih, rusak, atau tidak sesuai pesanan.
+- Melampirkan foto atau catatan bila diperlukan.
+- Mencatat tanggal kedaluwarsa dan nomor batch bila relevan.
+Pengelolaan barang keluar
+- Memproses perpindahan barang yang telah diotorisasi.
+- Mencatat pengeluaran barang berdasarkan dokumen yang sah.
+- Memantau barang rusak.
+- Mengajukan barang yang perlu dikembalikan ke pemasok.
+Stock opname
+- Menghitung barang fisik.
+- Memasukkan hasil penghitungan.
+- Melakukan penghitungan ulang apabila diminta.
+- Membandingkan hasil fisik dengan jumlah sistem jika diizinkan.
+- Mengajukan laporan perbedaan stok.
+- Mencatat alasan selisih dan bukti pendukung.
+Batasan staf gudang
+
+Staf gudang tidak boleh:
+- Menghapus riwayat pergerakan stok.
+- Mengubah hasil transaksi penjualan.
+- Mengakses akun kasir untuk berjualan.
+- Mengakses saldo kas dan rekening.
+- Mengakses laporan laba bersih.
+- Menyetujui sendiri penyesuaian stok yang diajukannya.
+- Mengubah jumlah stok tanpa alasan dan pencatatan transaksi persediaan yang sesuai.
+Staf gudang boleh mengelola proses operasional yang berkaitan dengan barang. Namun, penyesuaian stok yang berdampak material harus mengikuti prosedur persetujuan manager atau owner.
+Matriks hak akses
+Gunakan matriks berikut sebagai acuan implementasi awal.
+Modul	Owner	Manager	Kasir	Staf gudang
+POS dan transaksi penjualan	Ya	Ya	Ya, transaksi sendiri	Tidak
+Melihat jumlah stok	Ya	Ya	Tidak	Ya
+Membuat penyesuaian stok	Persetujuan	Usulan/otorisasi sesuai batas	Tidak	Usulan
+Stock opname	Lihat dan setujui	Kelola dan verifikasi	Tidak	Hitung dan laporkan
+Penerimaan barang	Ya	Ya	Tidak	Ya
+Purchase order	Ya	Buat/usulkan sesuai batas	Tidak	Lihat kebutuhan penerimaan
+Harga jual	Kelola penuh	Kelola sesuai kewenangan	Tidak dapat mengubah	Tidak diperlukan
+Harga modal dan margin	Ya	Sesuai hak akses	Tidak	Tidak secara default
+Laporan keuangan lengkap	Ya	Terbatas sesuai kebijakan	Tidak	Tidak
+Analitik bisnis	Lengkap	Operasional dan keuangan sesuai hak akses	Tidak	Stok sesuai tugas
+Promo dan loyalitas	Kelola dan setujui	Kelola sesuai batas	Gunakan promo yang tersedia	Tidak
+Pengelolaan pengguna	Ya	Terbatas jika diizinkan	Tidak	Tidak
+Audit log	Seluruh aktivitas	Sesuai kewenangan	Riwayat aktivitas sendiri yang relevan	Riwayat aktivitas sendiri yang relevan
+
+
+Implementasikan hak akses ini secara konsisten pada setiap layar, endpoint, dan fungsi sistem.
+3. MODUL POINT OF SALE (POS)
+Buat antarmuka POS yang cepat digunakan saat toko ramai.
+
+Fitur wajib:
+- Pemindaian barcode.
+- Pencarian nama produk.
+- Keranjang belanja.
+- Pengelolaan kuantitas pembelian.
+- Penerapan harga sesuai aturan.
+- Penerapan promo otomatis.
+- Pemilihan pelanggan member.
+- Pembayaran tunai.
+- Dukungan QRIS, transfer, kartu, atau metode lain jika integrasinya tersedia.
+- Pencetakan struk.
+- Pengiriman struk digital jika dikonfigurasi.
+- Pembatalan transaksi melalui alur yang terotorisasi.
+- Pengembalian barang dengan prosedur yang terdokumentasi.
+- Pembukaan dan penutupan shift.
+- Rekonsiliasi kas.
+- Pelaporan transaksi per kasir.
+Sistem harus membedakan antara transaksi yang berhasil dibayar, transaksi tertunda, transaksi gagal, dan transaksi yang dibatalkan.
+
+Setiap transaksi harus memiliki identitas unik dan pencatatan waktu yang jelas.
+
+Jangan mengizinkan penghapusan permanen atas transaksi yang sudah selesai. Koreksi transaksi harus dilakukan dengan mekanisme pembatalan, pembalikan, atau transaksi koreksi yang tercatat.
+
+Sistem harus mencatat metode pembayaran agar owner dapat membedakan penjualan tunai, pembayaran non-tunai, dan dana yang belum benar-benar diterima.
+4. MODUL MASTER PRODUK FMCG
+Buat modul produk yang sesuai dengan kebutuhan toko FMCG.
+
+Setiap produk memiliki data berikut:
+- SKU atau kode produk.
+- Barcode.
+- Nama produk.
+- Merek.
+- Kategori.
+- Subkategori.
+- Satuan dasar.
+- Satuan pembelian.
+- Satuan penjualan.
+- Konversi satuan.
+- Harga jual reguler.
+- Harga member jika tersedia.
+- Harga grosir atau reseller jika diaktifkan.
+- Riwayat harga beli.
+- Metode penilaian biaya persediaan.
+- Batas margin minimum.
+- Stok minimum.
+- Stok maksimum.
+- Waktu tunggu pemasok.
+- Pemasok utama.
+- Status produk aktif atau tidak aktif.
+- Nomor batch dan tanggal kedaluwarsa jika relevan.
+Dukung konversi satuan, misalnya:
+
+1 karton = 12 botol.
+
+Angka konversi tersebut harus dapat diatur berdasarkan produk yang sebenarnya.
+
+Apabila satuan dasar adalah botol, maka pembelian satu karton harus menambah persediaan sebanyak 12 botol berdasarkan aturan produk.
+
+Sistem harus memastikan semua transaksi pembelian, penjualan, retur, dan perpindahan barang menggunakan konversi satuan yang konsisten.
+
+Untuk produk yang memiliki tanggal kedaluwarsa, sediakan fitur pelacakan batch dan prioritaskan pengeluaran barang yang tanggal kedaluwarsanya lebih dekat melalui prinsip FEFO (First Expired, First Out).
+5. MODUL PENGADAAN DAN PEMBELIAN BARANG
+Buat alur pengadaan yang terintegrasi dengan pemasok dan persediaan.
+
+Alur standar:
+
+Usulan pembelian → Purchase Order → Persetujuan → Penerimaan Barang → Pemeriksaan Selisih → Pencatatan Utang atau Pembayaran → Pembaruan Persediaan.
+
+Sistem harus mendukung:
+- Database pemasok.
+- Kontak pemasok.
+- Riwayat pembelian.
+- Harga beli per produk.
+- Perbandingan harga pemasok.
+- Lead time pemasok.
+- Jumlah minimum pembelian.
+- Syarat pembayaran.
+- Pembelian tunai.
+- Pembelian tempo.
+- Pencatatan faktur pemasok.
+- Jadwal jatuh tempo.
+- Penerimaan parsial.
+- Perbedaan antara barang yang dipesan dan barang yang diterima.
+- Retur pembelian.
+- Riwayat perubahan harga beli.
+Jangan memperlakukan setiap barang yang datang sebagai stok yang otomatis benar. Sistem harus mencocokkan dokumen pembelian, penerimaan fisik, dan faktur sesuai alur persetujuan.
+
+Apabila pembelian dilakukan secara kredit, pencatatan persediaan dan pencatatan utang harus terhubung tanpa menggandakan biaya.
+
+Sistem harus mampu mengidentifikasi produk yang terlalu sering dibeli, produk yang mengalami kenaikan harga, serta pemasok yang berisiko mengganggu kelancaran persediaan.
+6. MODUL PERSEDIAAN DAN STOCK OPNAME
+Modul ini merupakan salah satu bagian paling penting dalam POS Nilla Daily Mart.
+
+Sistem harus memiliki catatan pergerakan persediaan yang dapat ditelusuri.
+
+Setiap pergerakan barang wajib mencatat:
+- Nomor transaksi.
+- SKU.
+- Jenis pergerakan.
+- Kuantitas.
+- Satuan.
+- Waktu kejadian.
+- Pengguna yang menjalankan aktivitas.
+- Sumber dan tujuan jika berupa perpindahan.
+- Alasan apabila terdapat koreksi.
+- Identitas pengguna yang menyetujui jika diperlukan.
+Jenis pergerakan sekurang-kurangnya mencakup:
+1. Penerimaan pembelian.
+2. Penjualan.
+3. Retur pelanggan.
+4. Retur pemasok.
+5. Transfer antar lokasi jika diterapkan.
+6. Barang rusak.
+7. Barang kedaluwarsa.
+8. Selisih stock opname.
+9. Penyesuaian resmi.
+10. Jenis koreksi lain yang memiliki alasan dan persetujuan.
+Prosedur stock opname
+Buat alur berikut:
+1. Owner atau manager membuat sesi stock opname.
+2. Sistem menentukan produk dan lokasi yang akan dihitung.
+3. Petugas gudang menghitung barang fisik.
+4. Hasil penghitungan dimasukkan ke sistem.
+5. Sistem membandingkan stok fisik dengan saldo sistem.
+6. Perbedaan ditampilkan dalam jumlah dan, bagi pengguna berwenang, nilai rupiah.
+7. Petugas mengajukan alasan atas selisih.
+8. Manager memeriksa hasilnya.
+9. Selisih material diteruskan kepada owner sesuai aturan persetujuan.
+10. Setelah disetujui, sistem membuat transaksi penyesuaian stok.
+11. Sistem menyimpan seluruh hasil penghitungan dan keputusan persetujuan.
+Sistem tidak boleh langsung mengubah saldo stok hanya karena petugas memasukkan angka penghitungan.
+
+Simpan riwayat stok sebelum penyesuaian, stok fisik, selisih, alasan, nilai selisih yang dihitung sistem, dan identitas pemberi persetujuan.
+Dashboard pengendalian stok
+Buat tampilan yang menunjukkan:
+- Jumlah SKU aktif.
+- Produk yang mencapai stok minimum.
+- Produk yang berpotensi kehabisan stok.
+- Produk dengan stok berlebih.
+- Produk lambat terjual.
+- Produk tidak bergerak.
+- Barang mendekati kedaluwarsa.
+- Barang rusak.
+- Nilai persediaan.
+- Frekuensi selisih stock opname.
+- Persentase selisih stok.
+- Estimasi kehilangan berdasarkan data yang tercatat.
+- Akurasi persediaan.
+- Perbedaan antara nilai stok sistem dan nilai stok fisik.
+Jangan langsung menyimpulkan bahwa setiap selisih stok adalah pencurian. Tampilkan penyebab potensial untuk diperiksa, misalnya kesalahan penerimaan, kesalahan satuan, barang rusak, retur tidak tercatat, atau kesalahan transaksi.
+7. MODUL KEUANGAN DAN PENGENDALIAN CASH FLOW
+Sistem harus membedakan secara tegas antara:
+
+Omzet, laba kotor, laba bersih, saldo kas, arus kas, utang, piutang, dan nilai persediaan.
+
+Jangan menyamakan omzet dengan keuntungan.
+
+Jangan menyamakan laba dengan uang tunai yang tersedia.
+
+Jangan menganggap pembelian persediaan selalu menjadi beban laba rugi pada saat uang dibayarkan. Sistem harus membedakan pembelian barang, pencatatan persediaan, pengakuan harga pokok penjualan, dan pembayaran utang pemasok.
+A. Laporan keuangan
+Sediakan sekurang-kurangnya:
+1. Laporan penjualan.
+2. Laporan laba rugi.
+3. Laporan penerimaan dan pengeluaran kas.
+4. Proyeksi arus kas.
+5. Laporan utang pemasok.
+6. Laporan piutang jika bisnis mengizinkannya.
+7. Laporan biaya operasional.
+8. Laporan nilai persediaan.
+9. Laporan margin per produk.
+10. Laporan margin per kategori.
+11. Laporan retur dan kerugian.
+12. Laporan diskon dan promo.
+13. Laporan rekonsiliasi kasir.
+14. Laporan kewajiban yang akan jatuh tempo.
+Semua laporan harus memiliki rentang tanggal dan penjelasan tentang bagaimana angka dihitung.
+B. Perhitungan laba
+Gunakan logika akuntansi yang konsisten.
+
+Secara umum:
+
+Penjualan bersih = Penjualan kotor − Diskon − Retur penjualan yang relevan.
+
+Laba kotor = Penjualan bersih − Harga Pokok Penjualan.
+
+Laba operasional = Laba kotor − Biaya Operasional.
+
+Laba bersih harus dihitung dengan mempertimbangkan komponen biaya lain yang relevan sesuai konfigurasi sistem.
+
+Pastikan pajak, biaya transaksi pembayaran, biaya pendanaan, dan pos lain tidak dihitung dua kali.
+
+Pengaturan pajak harus dapat disesuaikan dengan status usaha dan ketentuan yang berlaku. Jangan mengasumsikan semua transaksi wajib menggunakan perlakuan pajak yang sama.
+C. Dashboard arus kas
+Buat dashboard yang menampilkan:
+- Saldo kas awal.
+- Saldo kas akhir.
+- Penerimaan tunai.
+- Penerimaan non-tunai.
+- Pencairan pembayaran non-tunai yang sudah diterima.
+- Pengeluaran operasional.
+- Pembayaran utang pemasok.
+- Pengeluaran investasi.
+- Pengeluaran lain.
+- Perkiraan kewajiban mendatang.
+- Saldo kas minimum yang ditetapkan owner.
+- Perkiraan saldo kas pada akhir setiap hari.
+Bedakan dana yang sudah benar-benar diterima dari transaksi penjualan yang masih dalam proses penyelesaian.
+
+Jangan menghitung penerimaan QRIS atau pembayaran non-tunai sebagai saldo kas yang tersedia sebelum pencairan, apabila dana tersebut memang belum diterima.
+D. Cash flow warning system
+Buat sistem peringatan dini untuk mengurangi risiko gangguan likuiditas.
+
+Contoh peringatan:
+
+Peringatan kritis: Proyeksi kas tidak mencukupi.
+
+Penjelasan yang harus ditampilkan:
+- Tanggal perkiraan terjadinya masalah.
+- Saldo kas yang diproyeksikan.
+- Nilai kewajiban yang harus dibayar.
+- Besarnya kekurangan dana.
+- Transaksi atau kewajiban penyebabnya.
+- Perkiraan dampak jika tidak ditangani.
+- Rekomendasi tindakan.
+- Data dan asumsi yang digunakan.
+Contoh rekomendasi:
+- Menunda pembelian produk yang belum mendesak.
+- Mengurangi pembelian stok lambat terjual.
+- Mempercepat penagihan piutang yang sah.
+- Menegosiasikan jadwal pembayaran kepada pemasok.
+- Menghentikan sementara promo yang menekan margin.
+- Mengurangi pengeluaran nonesensial.
+- Mengevaluasi harga produk yang marginnya terlalu rendah.
+Jangan merekomendasikan penundaan kewajiban secara otomatis tanpa mempertimbangkan konsekuensi kontraktual dan hubungan dengan pemasok.
+
+Sistem hanya memberikan rekomendasi. Pembayaran, pembatalan pembelian, atau perubahan komitmen kepada pemasok tetap membutuhkan persetujuan manusia.
+8. MODUL AI BUSINESS INTELLIGENCE
+Ini merupakan salah satu fitur pembeda utama aplikasi.
+
+Saya ingin owner dan manager memiliki dashboard analisis bisnis interaktif yang dapat digunakan untuk menilai kondisi sekarang dan memperkirakan kondisi bisnis ke depannya.
+
+Jangan membuat AI hanya sebagai chatbot yang memberikan jawaban generik. AI harus menggunakan data operasional yang benar-benar tersedia dalam sistem, dengan hak akses sesuai peran pengguna.
+A. Dashboard Owner
+Buat dashboard dengan kelompok indikator berikut.
+1. Business Health
+Tampilkan:
+- Penjualan hari ini.
+- Penjualan bulan berjalan.
+- Pertumbuhan penjualan.
+- Laba kotor.
+- Laba operasional.
+- Laba bersih jika data sudah memadai.
+- Margin kotor.
+- Saldo kas.
+- Proyeksi arus kas.
+- Nilai persediaan.
+- Utang pemasok.
+- Beban operasional.
+- Tingkat kehilangan atau penyusutan stok yang tercatat.
+Setiap indikator harus dapat diklik untuk melihat rincian yang mendasarinya.
+2. Financial Risk Monitor
+Tampilkan tingkat risiko bisnis berdasarkan:
+- Proyeksi kekurangan kas.
+- Utang jatuh tempo.
+- Pertumbuhan biaya yang tidak diimbangi pertumbuhan laba kotor.
+- Penurunan margin.
+- Kenaikan nilai stok yang lambat terjual.
+- Konsentrasi pembelian terhadap pemasok tertentu.
+- Ketergantungan pada produk bermargin rendah.
+- Penyimpangan kas.
+- Selisih stok yang berulang.
+- Peningkatan retur atau barang rusak.
+Kelompokkan peringatan menjadi:
+- Informasi.
+- Waspada.
+- Risiko tinggi.
+- Kritis.
+Buat parameter agar owner dapat menetapkan ambang batas yang sesuai dengan karakteristik bisnisnya.
+3. Analisis Produk dan Kategori
+Sistem harus menjawab:
+- Produk apa yang memberikan kontribusi laba kotor terbesar?
+- Produk mana yang memberikan omzet tinggi tetapi margin rendah?
+- Produk apa yang cepat berputar?
+- Produk apa yang lambat berputar?
+- Produk mana yang sering kosong?
+- Produk mana yang menyerap terlalu banyak modal?
+- Produk mana yang memiliki tingkat retur tinggi?
+- Produk mana yang perlu ditinjau kembali harga jualnya?
+- Produk mana yang berpotensi dikurangi pembeliannya?
+Gunakan beberapa indikator sekaligus. Jangan menentukan bahwa produk harus dihentikan hanya berdasarkan omzet atau laba kotor absolut.
+
+Pertimbangkan margin, kecepatan perputaran, fungsi produk untuk menarik pelanggan, kontribusi terhadap keranjang belanja, dan hubungan dengan produk lain.
+4. Financial Scenario Simulator
+Sediakan fitur simulasi untuk owner.
+
+Contoh pertanyaan yang harus bisa dianalisis:
+- Apa yang terjadi jika penjualan turun 10%?
+- Apa yang terjadi jika harga beli pemasok naik 5%?
+- Apa yang terjadi jika margin rata-rata turun 1 poin persentase?
+- Apa yang terjadi jika biaya operasional naik Rp2 juta per bulan?
+- Apa yang terjadi jika saya menambah satu karyawan?
+- Apa yang terjadi jika saya menambah modal persediaan Rp20 juta?
+- Apa yang terjadi jika saya memberikan diskon 3%?
+- Apa yang terjadi jika saya memberikan tempo pembayaran kepada pelanggan?
+- Apa yang terjadi jika saya membuka cabang baru?
+Pengguna harus dapat mengubah asumsi pada dashboard dan melihat perubahan proyeksi.
+
+Pisahkan variabel yang dapat diubah dari data historis yang sebenarnya.
+
+Tampilkan perbandingan:
+1. Kondisi saat ini.
+2. Skenario optimistis.
+3. Skenario dasar.
+4. Skenario pesimistis.
+Jangan menyajikan proyeksi sebagai jaminan keuntungan.
+5. Rekomendasi Strategi Owner
+Setiap rekomendasi AI harus berisi:
+- Masalah yang ditemukan.
+- Data yang mendukung masalah.
+- Penyebab potensial.
+- Tindakan yang disarankan.
+- Estimasi dampak keuangan.
+- Risiko dari tindakan tersebut.
+- Prioritas pelaksanaan.
+- Tingkat keyakinan analisis.
+- Asumsi yang digunakan.
+Contoh:
+Temuan: Persediaan sejumlah produk meningkat lebih cepat daripada penjualan.
+
+Risiko: Modal kerja berpotensi tertahan dalam persediaan yang lambat bergerak.
+
+Rekomendasi: Tinjau ulang pesanan berikutnya dan hitung ulang kebutuhan berdasarkan proyeksi permintaan, stok yang tersedia, serta waktu tunggu pemasok.
+
+Dampak yang perlu dianalisis: Potensi penurunan kebutuhan modal kerja tanpa menimbulkan risiko kehabisan produk.
+
+Besarnya penghematan tidak boleh dikarang. Hitung berdasarkan data yang tersedia atau tampilkan sebagai estimasi dengan asumsi yang dinyatakan secara jelas.
+B. Dashboard Manager
+Dashboard manager berorientasi pada tindakan operasional.
+
+Tampilkan:
+- Pencapaian target penjualan.
+- Performa setiap kasir.
+- Margin penjualan.
+- Tren produk.
+- Produk yang perlu diisi ulang.
+- Produk yang lambat bergerak.
+- Produk yang mendekati kedaluwarsa.
+- Kinerja promo.
+- Kinerja pemasok.
+- Selisih hasil stock opname.
+- Pengeluaran operasional.
+- Risiko kas yang relevan.
+- Daftar tugas yang membutuhkan tindakan.
+Sediakan daftar rekomendasi operasional harian, misalnya:
+
+Prioritas hari ini
+1. Tinjau produk yang berisiko kosong dalam tiga hari mendatang.
+2. Periksa selisih stok yang belum diselesaikan.
+3. Evaluasi promo dengan margin di bawah target.
+4. Siapkan usulan pembelian untuk produk dengan kebutuhan yang sudah terverifikasi.
+Jumlah hari dan kriterianya harus bisa dikonfigurasi. Jangan membuat rekomendasi tersebut tanpa pemeriksaan terhadap data stok, permintaan, dan waktu tunggu pemasok.
+
+Manager juga harus bisa membuat simulasi penjualan, perubahan promo, dan kebutuhan stok, tetapi tidak boleh mengubah laporan historis demi membuat proyeksi tampak lebih baik.
+C. Asisten AI Interaktif
+Buat fitur chat bernama Nilla Business Advisor.
+
+Owner dapat mengajukan pertanyaan seperti:
+- "Bagaimana kondisi kesehatan bisnis saya bulan ini?"
+- "Mengapa omzet naik tetapi kas justru menurun?"
+- "Produk mana yang paling banyak mengikat modal?"
+- "Berapa jumlah pembelian yang aman untuk minggu depan?"
+- "Apakah bisnis saya mampu menambah satu karyawan?"
+- "Berapa penurunan omzet yang masih bisa ditanggung?"
+- "Apakah saya aman memberikan diskon tambahan?"
+- "Apa yang harus saya prioritaskan untuk meningkatkan laba?"
+- "Apakah saya sudah siap membuka cabang kedua?"
+Manager dapat bertanya:
+- "Produk apa yang harus segera dipesan ulang?"
+- "Kasir mana yang memiliki pola pembatalan transaksi paling tinggi?"
+- "Kategori apa yang mengalami penurunan margin?"
+- "Promo mana yang tidak efektif?"
+- "Apa yang harus diselesaikan hari ini?"
+AI harus menjawab menggunakan data sistem yang relevan.
+
+Jika data tidak cukup, AI wajib mengatakan bahwa informasi belum memadai dan menyebutkan data yang diperlukan.
+
+AI tidak boleh:
+- Mengarang angka keuangan.
+- Membuat proyeksi tanpa menyatakan asumsi.
+- Menganggap korelasi sebagai bukti penyebab.
+- Memberikan akses data di luar hak pengguna.
+- Mengubah catatan transaksi tanpa izin.
+- Melakukan pembayaran atau pembelian secara otomatis.
+- Menjanjikan keuntungan.
+- Menyimpulkan bahwa bisnis aman hanya berdasarkan omzet yang meningkat.
+Setiap jawaban analitis harus menyediakan jalur menuju laporan, metrik, atau transaksi yang mendasarinya jika pengguna memiliki hak akses untuk melihatnya.
+9. SISTEM PERINGATAN DINI UNTUK MENCEGAH KEBANGKRUTAN
+Buat modul khusus bernama Business Survival & Cash Protection System.
+
+Tujuannya adalah membantu owner mengidentifikasi risiko sebelum masalah menjadi krisis.
+
+Sistem tidak boleh menjanjikan bahwa kebangkrutan dapat dicegah sepenuhnya. Sistem harus membantu mengidentifikasi risiko, memperkirakan konsekuensinya, dan menyarankan tindakan korektif.
+A. Cash Reserve Protection
+Owner dapat menetapkan cadangan kas minimum.
+
+Sebagai konfigurasi awal yang dapat diubah, gunakan pendekatan cadangan kas setara satu bulan biaya operasional esensial.
+
+Jangan menetapkan angka tersebut sebagai aturan universal. Sistem harus mempertimbangkan kestabilan penjualan, pola pembayaran pemasok, utang jatuh tempo, dan risiko usaha.
+
+Buat status:
+
+Hijau: Proyeksi kas berada di atas cadangan minimum.
+
+Kuning: Proyeksi kas mendekati cadangan minimum.
+
+Merah: Proyeksi kas turun di bawah cadangan minimum.
+
+Kritis: Proyeksi kas tidak mencukupi kewajiban yang jatuh tempo.
+
+Tampilkan dasar perhitungan serta tindakan yang dapat dilakukan.
+B. Purchasing Guardrail
+Sistem harus mencegah keputusan pembelian yang hanya didasarkan pada tingginya omzet.
+
+Sebelum menyarankan pembelian, periksa:
+1. Stok yang tersedia.
+2. Permintaan penjualan yang diperkirakan.
+3. Stok dalam pesanan yang belum diterima.
+4. Waktu tunggu pemasok.
+5. Stok pengaman.
+6. Tanggal kedaluwarsa jika berlaku.
+7. Modal yang tersedia.
+8. Kewajiban pembayaran mendatang.
+9. Margin produk.
+10. Minimum order pemasok.
+Hitung rekomendasi jumlah pembelian berdasarkan kebutuhan, bukan sekadar target omzet.
+
+Jika pembelian yang diusulkan akan menyebabkan proyeksi kas melewati batas risiko, tampilkan peringatan dan minta persetujuan sesuai tingkat risiko.
+C. Margin Protection
+Buat batas margin minimum per SKU dan kategori.
+
+Sistem harus memberikan peringatan apabila:
+- Harga jual berada terlalu dekat dengan harga pokok penjualan.
+- Diskon menurunkan margin melewati batas yang ditetapkan.
+- Harga beli pemasok meningkat.
+- Biaya pembayaran atau biaya promosi membuat transaksi tidak lagi ekonomis.
+Untuk perhitungan awal:
+
+Margin kotor (%) = (Penjualan bersih − HPP) ÷ Penjualan bersih × 100%.
+
+Bedakan margin dari markup.
+
+Jangan menggunakan harga beli terakhir secara sembarangan apabila metode penilaian persediaan yang ditetapkan menghasilkan HPP berbeda.
+
+Sistem dapat memberikan peringatan atau meminta persetujuan khusus ketika harga di bawah batas yang ditetapkan.
+
+Namun, sediakan pengecualian yang terotorisasi untuk kebutuhan bisnis yang wajar, seperti penghabisan barang mendekati kedaluwarsa, selama keputusan tersebut tercatat dan risikonya ditampilkan.
+D. Operating Expense Protection
+Buat batas pengeluaran berdasarkan kategori.
+
+Contohnya:
+- Gaji.
+- Listrik dan air.
+- Transportasi.
+- Biaya administrasi.
+- Promosi.
+- Pemeliharaan.
+- Biaya lain.
+Setiap kategori memiliki anggaran bulanan, realisasi, sisa anggaran, dan proyeksi akhir bulan.
+
+Berikan peringatan ketika pengeluaran aktual atau proyeksi melebihi anggaran yang disetujui.
+E. Early Warning Indicators
+Sediakan indikator risiko untuk:
+- Arus kas negatif.
+- Penurunan laba kotor.
+- Penurunan margin.
+- Kenaikan beban operasional.
+- Utang jatuh tempo.
+- Produk lambat berputar.
+- Persediaan berlebihan.
+- Kehilangan stok.
+- Produk terlalu sering kosong.
+- Ketergantungan pada pemasok.
+- Ketergantungan pada beberapa produk.
+- Pembatalan atau retur yang tidak wajar.
+- Pengeluaran kas yang tidak biasa.
+- Pertumbuhan omzet yang tidak menghasilkan perbaikan kas.
+Ambang batas tiap indikator harus dapat dikonfigurasi berdasarkan karakteristik bisnis.
+
+Setiap peringatan harus mencantumkan data yang mendasari dan tindakan yang disarankan.
+10. MODUL PROMOSI, MEMBER, DAN LOYALITAS
+Buat modul promosi yang bertujuan meningkatkan retensi pelanggan dan keuntungan bisnis.
+
+Jangan merancang promo hanya untuk mengejar omzet.
+
+Sistem harus dapat mengukur dampaknya terhadap laba kotor, kontribusi margin, arus kas, dan perilaku pembelian pelanggan.
+A. Customer Loyalty Program
+Buat sistem member dengan:
+- Nomor member.
+- Nama pelanggan jika diberikan.
+- Nomor telepon jika diperlukan dan disetujui pelanggan.
+- Tanggal pendaftaran.
+- Riwayat transaksi member.
+- Poin aktif.
+- Riwayat poin diperoleh.
+- Riwayat poin ditukarkan.
+- Status member.
+- Ringkasan frekuensi belanja.
+Sediakan beberapa tingkat member yang dapat diatur, misalnya:
+- Regular.
+- Silver.
+- Gold.
+Nama tier, syarat keanggotaan, manfaat, dan periode evaluasinya harus dapat diubah.
+B. Sistem Poin
+Owner dapat menentukan berapa poin yang diperoleh berdasarkan pembelian.
+
+Contoh konfigurasi:
+- Setiap pembelian Rp10.000 memperoleh 1 poin.
+- Penukaran 100 poin memberikan manfaat sesuai ketentuan program.
+Nilai di atas hanyalah contoh, bukan aturan tetap.
+
+Aturan poin harus memperhitungkan retur, pembatalan, transaksi tidak sah, dan pembatasan promo yang berlaku.
+
+Semua perubahan poin harus tercatat dalam ledger khusus. Jangan hanya menyimpan saldo akhir tanpa riwayat perubahan.
+
+Jika transaksi dikembalikan, poin yang berasal dari transaksi tersebut harus disesuaikan sesuai kebijakan loyalitas.
+C. Jenis Promo
+Sistem harus mendukung:
+1. Diskon persentase.
+2. Diskon nominal.
+3. Harga khusus member.
+4. Promo bundling.
+5. Beli sejumlah produk, dapat bonus.
+6. Buy X Get Y.
+7. Diskon berdasarkan jumlah pembelian.
+8. Promo kategori tertentu.
+9. Promo waktu tertentu.
+10. Voucher belanja.
+11. Reward penukaran poin.
+12. Promo pelanggan baru.
+13. Promo pelanggan yang sudah lama tidak berbelanja.
+14. Promo produk yang perputarannya lambat.
+15. Promo yang didanai pemasok jika tersedia.
+16. Promo grosir atau reseller jika model tersebut diaktifkan.
+Setiap promo harus mempunyai tanggal mulai, tanggal selesai, batas penggunaan, produk yang memenuhi syarat, kelompok pelanggan yang memenuhi syarat, dan batas diskon.
+D. Promotion Guardrail
+Sistem wajib memeriksa konsekuensi promo sebelum promo dijalankan.
+
+Perhitungkan:
+- Harga jual normal.
+- HPP.
+- Besaran diskon.
+- Kontribusi biaya pembayaran.
+- Biaya promo yang ditanggung toko.
+- Subsidi dari pemasok jika ada dan dapat diverifikasi.
+- Perkiraan perubahan volume penjualan.
+Sediakan indikator:
+- Harga setelah diskon.
+- Margin sebelum promo.
+- Margin setelah promo.
+- Perkiraan laba kotor per transaksi.
+- Jumlah penggunaan promo.
+- Nilai diskon yang diberikan.
+- Biaya promo yang ditanggung toko.
+- Perkiraan kontribusi hasil promo.
+Jika margin diperkirakan berada di bawah batas yang ditetapkan, sistem harus memberikan peringatan.
+
+Promo yang melampaui batas diskon atau risiko yang ditentukan owner harus menunggu persetujuan.
+
+Kasir hanya boleh menggunakan promo yang telah disetujui dan aktif.
+E. Promo Performance Dashboard
+Buat laporan:
+- Total transaksi promo.
+- Nilai penjualan dari transaksi promo.
+- Total diskon.
+- Margin setelah promo.
+- Tingkat penggunaan voucher.
+- Penjualan rata-rata per transaksi.
+- Rata-rata nilai keranjang.
+- Frekuensi pembelian member.
+- Pelanggan yang melakukan pembelian ulang.
+- Produk yang mengalami peningkatan penjualan selama promo.
+- Produk yang justru hanya mengalami perpindahan penjualan dari periode biasa.
+Jika data pembanding tidak cukup untuk mengetahui apakah promo benar-benar menambah penjualan, tampilkan keterbatasan tersebut.
+
+Jangan menyebut seluruh penjualan selama periode promo sebagai penjualan tambahan akibat promo.
+11. MODUL CUSTOMER RELATIONSHIP MANAGEMENT (CRM)
+Sediakan CRM untuk membantu bisnis memahami dan mempertahankan pelanggan.
+
+Fitur:
+- Segmentasi pelanggan berdasarkan aktivitas pembelian.
+- Frekuensi kunjungan.
+- Nilai transaksi rata-rata.
+- Nilai belanja selama periode tertentu.
+- Kategori produk yang sering dibeli.
+- Pelanggan baru.
+- Pelanggan aktif.
+- Pelanggan yang mulai jarang berbelanja.
+- Evaluasi efektivitas program loyalitas.
+Segmentasi dapat digunakan untuk membuat kampanye seperti:
+- Promo pelanggan baru.
+- Penawaran pelanggan yang lama tidak berbelanja.
+- Reward pelanggan rutin.
+- Promo kategori yang relevan.
+- Penawaran produk pelengkap.
+Jangan mengirimkan komunikasi pemasaran tanpa memperhatikan persetujuan dan preferensi komunikasi pelanggan.
+
+Batasi pengumpulan data pribadi pada data yang benar-benar diperlukan, dan sediakan pengaturan akses yang sesuai.
+12. INTERACTIVE BUSINESS ANALYTICS
+Seluruh dashboard owner dan manager harus bersifat interaktif.
+
+Pengguna tidak cukup hanya melihat angka statis.
+
+Sediakan filter berdasarkan:
+- Rentang waktu.
+- Kategori produk.
+- SKU.
+- Pemasok.
+- Kasir.
+- Metode pembayaran.
+- Jenis transaksi.
+- Jenis promo.
+- Segmen pelanggan.
+- Lokasi atau cabang jika fitur multi-cabang diaktifkan.
+Sediakan tampilan grafik tren, tabel rincian, perbandingan periode, dan indikator perubahan.
+
+Ketika pengguna mengklik sebuah indikator, sistem harus dapat menampilkan data sumber yang menyusun angka tersebut sesuai hak aksesnya.
+Forecasting Engine
+Buat mesin proyeksi untuk:
+1. Penjualan.
+2. Laba kotor.
+3. Kebutuhan persediaan.
+4. Arus kas.
+5. Pembayaran pemasok.
+6. Biaya operasional.
+7. Kontribusi promo.
+8. Kebutuhan modal kerja.
+Sediakan horizon proyeksi yang dapat dipilih, misalnya:
+- 7 hari.
+- 30 hari.
+- 90 hari.
+- 180 hari.
+Pilih metode proyeksi yang sesuai dengan ketersediaan dan karakteristik data.
+
+Jika data historis masih sedikit, gunakan pendekatan sederhana dan jelaskan keterbatasannya. Jangan berpura-pura dapat menghasilkan prediksi yang akurat ketika data tidak mendukungnya.
+
+Apabila tersedia data yang memadai, pertimbangkan:
+- Tren penjualan.
+- Pola hari kerja dan akhir pekan.
+- Musim atau periode tertentu.
+- Perubahan harga.
+- Ketersediaan produk.
+- Aktivitas promo.
+- Lead time pemasok.
+- Riwayat stockout.
+Setiap proyeksi harus menampilkan asumsi, waktu pembaruan, dan tingkat ketidakpastian yang sesuai.
+
+Jika memungkinkan, evaluasi kesalahan prediksi terhadap hasil aktual agar metode proyeksi bisa diperbaiki.
+13. SISTEM REKOMENDASI PEMBELIAN ULANG
+Buat fitur Smart Replenishment untuk menyarankan produk yang perlu dipesan ulang.
+
+Gunakan parameter seperti:
+- Rata-rata penjualan harian.
+- Tren permintaan.
+- Stok tersedia.
+- Stok yang sudah dipesan.
+- Penjualan yang belum sepenuhnya tercermin akibat produk kosong.
+- Lead time pemasok.
+- Stok pengaman.
+- Minimum order quantity.
+- Tanggal kedaluwarsa.
+- Batas modal pembelian.
+- Kewajiban pembayaran mendatang.
+Sebagai titik awal, gunakan logika kebutuhan stok berikut:
+
+Posisi persediaan = Stok tersedia + Stok dalam pesanan yang belum diterima − Kebutuhan stok yang telah dialokasikan jika relevan.
+
+Titik pemesanan ulang = Permintaan yang diperkirakan selama lead time + Stok pengaman.
+
+Kuantitas pembelian harus disesuaikan dengan posisi persediaan dan aturan pengadaan.
+
+Hindari rekomendasi pembelian yang membuat stok melampaui kebutuhan secara tidak wajar.
+
+Jika rekomendasi pembelian berisiko mengurangi kas di bawah batas minimum, tampilkan peringatan dan usulkan alternatif yang lebih aman.
+
+Sistem hanya membuat rekomendasi atau purchase order sesuai hak akses. Pengiriman purchase order kepada pemasok harus membutuhkan persetujuan sesuai kebijakan.
+14. DETEKSI AKTIVITAS TIDAK WAJAR DAN PENCEGAHAN KECURANGAN
+Buat modul Operational Anomaly Detection.
+
+Tujuannya adalah mengidentifikasi pola transaksi yang layak diperiksa lebih lanjut.
+
+Contoh yang perlu dipantau:
+- Pembatalan transaksi yang terlalu sering.
+- Retur yang berulang.
+- Diskon di luar pola normal.
+- Selisih kas yang berulang.
+- Transaksi pada waktu yang tidak biasa.
+- Perbedaan antara jumlah penjualan dan penerimaan kas.
+- Penyesuaian stok yang terlalu sering.
+- Barang yang sering hilang pada kategori tertentu.
+- Penerimaan barang dengan selisih berulang.
+- Penggunaan promo yang tidak sesuai ketentuan.
+Sistem harus membandingkan aktivitas dengan baseline yang relevan, bukan langsung menyimpulkan bahwa terdapat kecurangan.
+
+Setiap temuan harus menampilkan bukti berupa transaksi, waktu, pengguna yang berwenang untuk melihatnya, dan alasan mengapa aktivitas dianggap tidak biasa.
+
+Buat mekanisme pemeriksaan dan penyelesaian temuan.
+
+Audit log tidak boleh dapat dihapus atau diubah oleh kasir, manager, maupun staf gudang. Pemilik sistem tetap harus memiliki prosedur keamanan, retensi, dan pencadangan yang terkontrol.
+15. KEAMANAN, INTEGRITAS DATA, DAN PEMULIHAN SISTEM
+Keamanan bukan fitur tambahan. Keamanan merupakan fondasi seluruh aplikasi.
+
+Terapkan:
+- Autentikasi yang aman.
+- Pengelolaan sesi.
+- Pembatasan upaya login.
+- Otorisasi berdasarkan peran.
+- Perlindungan endpoint dan API.
+- Validasi input.
+- Penggunaan mekanisme pengamanan kata sandi yang sesuai.
+- Pengelolaan rahasia aplikasi melalui konfigurasi yang aman.
+- Audit log.
+- Pencatatan perubahan data sensitif.
+- Prosedur pemulihan akun.
+- Backup berkala.
+- Prosedur pemulihan data.
+- Pengamanan data pelanggan.
+- Pengujian hak akses lintas peran.
+Transaksi penjualan dan pergerakan stok harus menggunakan mekanisme transaksi basis data yang konsisten agar kegagalan di tengah proses tidak menyebabkan data menjadi tidak cocok.
+
+Contohnya, transaksi penjualan yang berhasil harus memiliki catatan pembayaran dan pergerakan stok yang konsisten.
+
+Apabila transaksi gagal, sistem tidak boleh meninggalkan kondisi ketika uang telah dicatat diterima tetapi barang tidak tercatat keluar, atau sebaliknya.
+
+Sediakan mekanisme pencegahan transaksi ganda (idempotency) pada proses yang membutuhkannya.
+
+Buat prosedur backup yang dapat dipulihkan, bukan hanya menghasilkan file cadangan tanpa pernah menguji pemulihannya.
+16. DESAIN ANTARMUKA DAN PENGALAMAN PENGGUNA
+Gunakan desain profesional untuk bisnis retail modern.
+
+Karakter desain:
+- Bersih.
+- Mudah dibaca.
+- Tidak terlalu ramai.
+- Responsif.
+- Cepat digunakan.
+- Mengutamakan fungsi.
+- Konsisten di seluruh modul.
+Gunakan warna yang mendukung pembacaan status, misalnya status aman, perlu perhatian, dan kritis. Jangan mengandalkan warna saja; sertakan label atau ikon agar informasi tetap mudah dipahami.
+Tampilan Owner
+Halaman awal menampilkan:
+1. Ringkasan penjualan.
+2. Ringkasan keuntungan.
+3. Posisi dan proyeksi kas.
+4. Risiko utama.
+5. Persediaan bermasalah.
+6. Utang yang mendekati jatuh tempo.
+7. Rekomendasi AI.
+8. Simulasi bisnis.
+Tampilan Manager
+Halaman awal menampilkan:
+1. Penjualan harian.
+2. Target dan pencapaian.
+3. Produk yang perlu ditindaklanjuti.
+4. Performa kasir.
+5. Aktivitas gudang yang tertunda.
+6. Promo yang sedang berjalan.
+7. Peringatan operasional.
+8. Tugas prioritas.
+Tampilan Kasir
+Halaman awal harus sesederhana mungkin:
+1. Buka shift.
+2. Mulai transaksi.
+3. Pilih atau pindai produk.
+4. Pilih member bila tersedia.
+5. Proses pembayaran.
+6. Cetak struk.
+7. Tutup shift.
+Tidak boleh ada menu stok, pembelian, atau laporan keuangan yang tidak menjadi kewenangannya.
+Tampilan Staf Gudang
+Halaman awal menampilkan:
+1. Penerimaan barang.
+2. Daftar barang yang harus dihitung.
+3. Perpindahan barang yang menunggu proses.
+4. Laporan selisih stok.
+5. Barang rusak atau mendekati kedaluwarsa.
+6. Status tugas gudang.
+Sediakan pencarian cepat serta proses input yang tidak mengharuskan staf mengisi formulir panjang untuk setiap aktivitas sederhana.
+17. DATA MODEL DAN STRUKTUR BASIS DATA
+Sebelum implementasi, rancang ERD atau Entity Relationship Diagram.
+
+Basis data sekurang-kurangnya harus memiliki entitas yang sesuai untuk:
+- Users.
+- Roles.
+- Permissions.
+- Products.
+- Product Categories.
+- Units of Measure.
+- Suppliers.
+- Purchase Orders.
+- Purchase Order Items.
+- Goods Receipts.
+- Goods Receipt Items.
+- Inventory Locations jika diperlukan.
+- Inventory Movements.
+- Inventory Balances.
+- Stock Counts.
+- Stock Count Items.
+- Stock Adjustments.
+- Sales.
+- Sale Items.
+- Payments.
+- Cash Shifts.
+- Cash Reconciliations.
+- Sales Returns.
+- Expenses.
+- Accounts Payable.
+- Accounts Receivable jika digunakan.
+- Promotions.
+- Promotion Rules.
+- Customers.
+- Memberships.
+- Loyalty Ledger.
+- Approval Requests.
+- Audit Logs.
+- Forecasts.
+- Forecast Assumptions.
+- Notifications.
+- Application Settings.
+Sesuaikan entitas dengan kebutuhan implementasi. Jangan membuat tabel duplikat yang menimbulkan ketidakkonsistenan.
+
+Gunakan relasi dan batasan basis data untuk menjaga integritas.
+
+Saldo stok harus dapat ditelusuri ke riwayat pergerakan yang membentuknya.
+
+Saldo poin member harus dapat direkonsiliasi dengan ledger poin.
+
+Saldo kas harus dapat ditelusuri ke transaksi dan rekonsiliasi yang berkaitan.
+
+Riwayat transaksi keuangan harus tetap dapat diaudit ketika terjadi koreksi.
+18. PENGEMBANGAN BERTAHAP
+Jangan mencoba membangun seluruh sistem sekaligus tanpa pengujian.
+
+Kerjakan pengembangan secara bertahap dengan urutan berikut.
+Fase 1 — Fondasi Sistem
+Bangun:
+- Struktur aplikasi.
+- Autentikasi.
+- Manajemen pengguna.
+- RBAC.
+- Database.
+- Master produk.
+- Master pemasok.
+- Audit log dasar.
+Fase 2 — POS dan Persediaan
+Bangun:
+- Modul kasir.
+- Barcode.
+- Transaksi penjualan.
+- Pembayaran.
+- Penerimaan pembelian.
+- Pergerakan stok.
+- Stock opname.
+- Rekonsiliasi kasir.
+Fase 3 — Keuangan
+Bangun:
+- HPP.
+- Laba rugi.
+- Arus kas.
+- Pengeluaran.
+- Utang pemasok.
+- Rekonsiliasi pembayaran.
+- Peringatan likuiditas.
+Fase 4 — Promotion and Loyalty
+Bangun:
+- Member.
+- Poin.
+- Promo.
+- Voucher.
+- Harga khusus.
+- Evaluasi keuntungan promo.
+- Dashboard retensi pelanggan.
+Fase 5 — Business Intelligence
+Bangun:
+- Dashboard owner.
+- Dashboard manager.
+- Analisis produk.
+- Forecasting.
+- Smart Replenishment.
+- Financial Scenario Simulator.
+- Nilla Business Advisor.
+Fase 6 — Security and Production Readiness
+Lakukan:
+- Pengujian keamanan.
+- Pengujian hak akses.
+- Pengujian konsistensi transaksi.
+- Pengujian perhitungan keuangan.
+- Pengujian restore backup.
+- Pengujian performa.
+- Pemeriksaan bug.
+- Persiapan deployment.
+Pada setiap fase, jelaskan modul yang sudah berfungsi, bagian yang belum selesai, dan pengujian yang sudah dilakukan.
+
+Jangan sekadar membuat antarmuka yang terlihat selesai tetapi menggunakan data palsu untuk seluruh fungsi operasional.
+
+Data contoh boleh digunakan untuk demonstrasi, tetapi tandai dengan jelas bahwa data tersebut adalah data simulasi.
+19. ACCEPTANCE TEST — PENGUJIAN WAJIB
+Sebelum menyatakan aplikasi siap digunakan, lakukan minimal pengujian berikut.
+Pengujian A — Keamanan Kasir
+1. Kasir berhasil login.
+2. Kasir dapat melakukan penjualan.
+3. Kasir tidak dapat membuka modul stok.
+4. Kasir tidak dapat melihat jumlah stok.
+5. Kasir tidak dapat mengakses API persediaan secara langsung.
+6. Kasir tidak dapat melihat harga modal.
+7. Kasir tidak dapat membuka laporan keuangan owner.
+8. Kasir tidak dapat mengubah harga jual tanpa izin.
+9. Kasir tidak dapat menghapus transaksi yang selesai.
+10. Kasir tidak dapat menyetujui retur atau penyesuaian stok yang berada di luar kewenangannya.
+Pengujian harus dilakukan terhadap backend, bukan hanya tampilan.
+Pengujian B — Persediaan
+1. Barang yang diterima meningkatkan stok sesuai satuan konversi.
+2. Barang yang terjual mengurangi stok dengan benar.
+3. Retur memengaruhi stok sesuai kondisi barang dan kebijakan.
+4. Stock opname dapat membandingkan stok fisik dengan stok sistem.
+5. Penyesuaian stok tidak terjadi sebelum persetujuan yang diperlukan.
+6. Riwayat stok tetap dapat ditelusuri setelah koreksi.
+7. Dua transaksi bersamaan tidak menyebabkan penjualan melebihi stok yang tersedia tanpa mekanisme pengendalian yang telah ditetapkan.
+Pengujian C — Keuangan
+1. Penjualan, diskon, dan retur menghasilkan angka yang konsisten.
+2. Harga pokok penjualan mengikuti metode penilaian persediaan yang dikonfigurasi.
+3. Laba kotor dihitung dengan benar.
+4. Pengeluaran kas tercatat sesuai metode pembayarannya.
+5. Pembelian stok dan pembayaran utang tidak menggandakan beban.
+6. Penerimaan non-tunai yang belum dicairkan tidak keliru ditampilkan sebagai kas tersedia.
+7. Proyeksi kas memperhitungkan kewajiban yang relevan.
+8. Dashboard dapat menjelaskan sumber angka yang ditampilkan.
+Pengujian D — Promo
+1. Promo aktif hanya berlaku sesuai jadwal.
+2. Promo hanya berlaku untuk produk dan pelanggan yang memenuhi ketentuan.
+3. Diskon tidak dapat menembus batas yang membutuhkan persetujuan tanpa otorisasi.
+4. Penggunaan poin menghasilkan catatan ledger.
+5. Retur menyesuaikan poin sesuai kebijakan.
+6. Laporan promo membedakan omzet, diskon, dan margin.
+Pengujian E — Business Intelligence
+1. Semua proyeksi memiliki periode dan asumsi.
+2. AI tidak mengarang angka ketika data tidak tersedia.
+3. Dashboard manager tidak membocorkan informasi owner yang dibatasi.
+4. Perubahan asumsi pada simulator mengubah proyeksi sesuai rumus.
+5. Peringatan kas dapat ditelusuri ke data arus kas yang mendasarinya.
+6. Pengguna dapat membandingkan proyeksi dengan hasil aktual apabila data sudah tersedia.
+7. Rekomendasi tidak otomatis menjalankan pembelian, pembayaran, atau perubahan data keuangan.
+Jika pengujian gagal, perbaiki masalah sebelum menyatakan modul tersebut selesai.
+20. HASIL AKHIR YANG SAYA MINTA DARI ANDA
+Kerjakan proyek ini dalam urutan deliverable berikut.
+
+Deliverable 1 — Product Requirements Document (PRD)
+
+Buat dokumen kebutuhan sistem, tujuan bisnis, fitur, dan batasan aplikasi.
+
+Deliverable 2 — Role and Permission Matrix
+
+Buat tabel hak akses yang lebih terperinci, termasuk izin melihat, membuat, mengubah, menyetujui, dan mengekspor data.
+
+Deliverable 3 — Business Process Flow
+
+Buat alur proses kasir, pengadaan, penerimaan barang, stock opname, pembelian, promosi, dan rekonsiliasi kas.
+
+Deliverable 4 — Architecture and Database Design
+
+Jelaskan arsitektur teknologi, struktur basis data, ERD, serta aturan integritas transaksi.
+
+Deliverable 5 — UI/UX Design
+
+Rancang tampilan untuk empat tipe pengguna. Pastikan tampilan kasir dan gudang benar-benar berbeda dari dashboard owner.
+
+Deliverable 6 — Working Application
+
+Implementasikan aplikasi sesuai kemampuan lingkungan pengembangan, lengkap dengan autentikasi, otorisasi, modul inti, dan data yang tersimpan secara konsisten.
+
+Deliverable 7 — Business Intelligence
+
+Implementasikan dashboard analitik, proyeksi keuangan, simulator skenario, rekomendasi pembelian, peringatan risiko, dan Nilla Business Advisor.
+
+Deliverable 8 — Testing and Deployment Guide
+
+Sediakan pengujian yang telah dilakukan, hasil pengujian, konfigurasi deployment, strategi backup, dan petunjuk penggunaan.
+
+Jelaskan dengan jujur apabila ada fitur yang baru berupa rancangan, masih memakai data simulasi, membutuhkan layanan eksternal, atau belum lolos pengujian.
+
+Prioritaskan sistem yang benar-benar bekerja dengan benar daripada aplikasi yang terlihat lengkap tetapi tidak mempunyai logika bisnis yang dapat diandalkan.
+
+Mulailah dengan menyusun PRD, matriks hak akses, alur bisnis, arsitektur, dan rancangan basis data. Setelah rancangan dasar konsisten, lanjutkan ke implementasi secara bertahap.
+
+Sasaran akhir: POS Nilla Daily Mart harus menjadi sistem pengendalian bisnis FMCG yang mampu menjaga integritas transaksi, mengendalikan stok, mengawasi karyawan, melindungi arus kas, mengukur efektivitas promosi, dan membantu owner mengambil keputusan berdasarkan data.
+21. Instruksi Tambahan yang Perlu Anda Tekankan kepada GPT Astra
+Setelah mengirimkan Master Prompt di atas, saya menyarankan Anda menambahkan instruksi ini sebagai pesan lanjutan:
+Prioritas utama saya bukan banyaknya fitur, melainkan keamanan transaksi, ketepatan laporan keuangan, kontrol stok, dan perlindungan arus kas.
+
+Sebelum melanjutkan implementasi, lakukan pemeriksaan kritis terhadap rancangan yang telah dibuat.
+
+Identifikasi potensi kesalahan logika, konflik hak akses, duplikasi data keuangan, risiko manipulasi transaksi, serta celah yang memungkinkan seorang kasir mengakses data persediaan.
+
+Periksa juga apakah mesin analisis bisnis benar-benar dapat membedakan omzet, laba, arus kas, dan modal yang tertahan dalam persediaan.
+
+Berikan perhatian khusus pada risiko bisnis FMCG yang memiliki perputaran barang tinggi tetapi margin relatif tipis.
+
+Jangan menyarankan penambahan omzet sebagai solusi tunggal untuk semua masalah. Evaluasi apakah pertumbuhan penjualan benar-benar memberikan tambahan keuntungan dan kas.
+
+Sebelum membuat rekomendasi pembelian, evaluasi posisi persediaan, proyeksi permintaan, utang jatuh tempo, dan ketersediaan kas.
+
+Sebelum menyetujui promo, evaluasi margin setelah diskon serta biaya promosi.
+
+Terakhir, lakukan pengujian hak akses menggunakan keempat akun. Buktikan bahwa kasir benar-benar tidak dapat mengakses jumlah stok, termasuk melalui URL atau API yang diakses secara langsung.
+
+Jika sistem belum mampu memenuhi suatu persyaratan, nyatakan kekurangannya secara eksplisit dan berikan rencana perbaikan. Jangan menyatakan fitur sudah berfungsi hanya karena tampilannya sudah dibuat.
+
+Rekomendasi Saya sebagai Konsultan Bisnis
+Menurut saya, ada tiga aspek dari rancangan ini yang perlu Anda prioritaskan sebelum memikirkan fitur-fitur tambahan.
+1. Bedakan omzet, keuntungan, dan uang yang bisa digunakan
+Untuk bisnis FMCG, ketiga hal ini sangat penting.
+
+Bayangkan ilustrasi berikut. Angka ini hanya contoh, bukan data aktual toko Anda.
+Indikator	Nilai
+Omzet bulanan	Rp300.000.000
+HPP barang terjual	Rp285.000.000
+Laba kotor	Rp15.000.000
+Biaya operasional	Rp9.000.000
+Laba operasional sederhana	Rp6.000.000
+
+
+Pada ilustrasi tersebut, omzet mencapai Rp300 juta, tetapi laba operasional sederhananya hanya Rp6 juta sebelum memperhitungkan komponen lain yang mungkin relevan.
+
+Artinya, sistem tidak boleh sekadar mengirimkan notifikasi bahwa omzet meningkat 20%.
+
+Sistem juga harus menilai apakah laba kotor meningkat, berapa biaya tambahan untuk menghasilkan penjualan itu, serta apakah arus kas cukup untuk memenuhi kewajiban.
+
+Lebih penting lagi, sistem perlu mendeteksi keadaan ketika laporan laba terlihat positif tetapi toko mengalami kekurangan kas karena modal terlalu banyak tertahan dalam persediaan atau pembayaran pemasok jatuh tempo.
+
+Inilah fungsi utama Business Survival & Cash Protection System.
+2. Pisahkan pengawasan stok dari pengawasan penjualan
+Keputusan Anda untuk membatasi akses kasir terhadap stok merupakan langkah yang masuk akal untuk memperkuat kontrol internal.
+
+Namun, pembatasan tersebut harus dilaksanakan dengan tepat.
+
+Kasir tidak perlu mengetahui jumlah stok atau nilai persediaan. Ia cukup menjalankan transaksi berdasarkan katalog produk dan harga yang tersedia. Sistem di belakang layar yang memvalidasi stok dan memproses pengurangan persediaan.
+
+Staf gudang mengontrol penerimaan serta pergerakan barang. Manager memeriksa penyimpangan dan menjalankan pengawasan operasional. Owner memiliki visibilitas menyeluruh serta kewenangan persetujuan yang relevan.
+
+Pemisahan tugas ini mengurangi risiko seseorang dapat melakukan transaksi, mengubah catatan stok, kemudian menghapus jejak aktivitasnya sendiri.
+3. Jadikan AI sebagai sistem pendukung keputusan, bukan pengambil keputusan otomatis
+AI dapat membantu memperkirakan kebutuhan pembelian, menganalisis tren penjualan, menilai promo, dan mendeteksi tanda-tanda risiko arus kas.
+
+Tetapi rekomendasi AI harus memiliki dasar yang bisa diperiksa.
+
+Misalnya, ketika AI menyatakan bahwa suatu produk perlu dikurangi pembeliannya, owner harus dapat melihat apakah rekomendasi itu dibuat karena penjualan turun, stok sudah berlebih, waktu kedaluwarsa semakin dekat, atau modal kerja sedang tertekan.
+
+AI juga tidak seharusnya langsung menghentikan pembelian produk hanya karena perputarannya lambat. Produk tersebut mungkin merupakan kebutuhan pelanggan yang penting, atau mungkin selalu terjual ketika tersedia.
+
+Karena itu, rekomendasi harus mempertimbangkan konteks bisnis, menjelaskan alasan, dan tetap berada di bawah kendali manusia.
+Kesimpulan
+Saya menyarankan Anda membangun POS Nilla Daily Mart dalam urutan prioritas:
+
+Pertama, keamanan pengguna dan transaksi. Kedua, integritas stok dan keuangan. Ketiga, pengendalian arus kas. Keempat, promosi dan loyalitas. Kelima, analitik bisnis dan AI forecasting.
+
+Urutan ini penting karena kecanggihan AI tidak akan banyak membantu apabila data penjualan, stok, atau biaya yang dimasukkan ke sistem ternyata tidak akurat.
+
+Sasaran akhirnya bukan sekadar membuat toko memiliki aplikasi modern. Sasaran akhirnya adalah membangun sistem yang membantu Anda mengetahui kondisi bisnis secara objektif, mendeteksi masalah lebih awal, menjaga modal kerja, serta mengambil keputusan ekspansi berdasarkan kemampuan keuangan yang nyata.
