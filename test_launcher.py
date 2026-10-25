@@ -40,12 +40,16 @@ class LauncherTests(unittest.TestCase):
                         if process.poll() is not None: break
                         time.sleep(.1)
                 self.assertIsNotNone(status);self.assertEqual(status['application'],'nilla-daily-mart')
-                duplicate=subprocess.run(command,env=env,input='',capture_output=True,text=True,timeout=10)
-                self.assertNotEqual(duplicate.returncode,0);self.assertIn('Port',duplicate.stdout)
             finally:
                 output,_=process.communicate('q\n',timeout=10)
             self.assertEqual(process.returncode,0,output);self.assertIn('Server berhenti',output)
             self.assertTrue(Path(env['NILLA_DB']).is_file())
+            # A live unrelated listener must prevent Nilla from claiming its port.
+            with socket.socket() as blocker:
+                blocker.bind(('127.0.0.1',0)); blocked_port=blocker.getsockname()[1]; blocker.listen()
+                blocked=[sys.executable,str(launch.ROOT/'launch.py'),'--mode','local','--no-browser','--port',str(blocked_port)]
+                duplicate=subprocess.run(blocked,env=env,input='',capture_output=True,text=True,timeout=10)
+            self.assertNotEqual(duplicate.returncode,0);self.assertIn('Port',duplicate.stdout)
     def test_lan_requires_owner(self):
         with tempfile.TemporaryDirectory() as temp:
             result=subprocess.run([sys.executable,str(launch.ROOT/'launch.py'),'--mode','lan','--no-browser'],env=dict(os.environ,NILLA_DB=str(Path(temp)/'new.sqlite3')),input='',capture_output=True,text=True,timeout=10)

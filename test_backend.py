@@ -124,8 +124,11 @@ class RetailTests(unittest.TestCase):
     def test_backup_restore_integrity(self):
         self.ok('sales',self.sale(member_id=1),'cashier'); target=Path(self.temp.name)/('backup-'+secrets.token_hex(4)+'.sqlite3')
         subprocess.run([sys.executable,str(b.ROOT/'backup.py'),str(b.DB),str(target)],check=True,capture_output=True)
-        with sqlite3.connect(target) as db:
+        db=sqlite3.connect(target)
+        try:
             self.assertEqual(db.execute('PRAGMA integrity_check').fetchone()[0],'ok'); self.assertEqual(db.execute('SELECT COUNT(*) FROM sales').fetchone()[0],1); self.assertEqual(db.execute('SELECT stock FROM products').fetchone()[0],23)
+        finally:
+            db.close()
         restore=Path(self.temp.name)/('restore-'+secrets.token_hex(4)+'.sqlite3'); subprocess.run([sys.executable,str(b.ROOT/'backup.py'),str(target),str(restore)],check=True,capture_output=True)
         original=b.DB
         try:

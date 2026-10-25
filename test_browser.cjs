@@ -15,6 +15,10 @@ let browser;
   browser=await chromium.launch({headless:true});
   const context=await browser.newContext({viewport:{width:1440,height:1000}}), page=await context.newPage(), errors=[];
   page.on('pageerror',e=>errors.push(e.message));
+  // Block every external URL: the complete checkout must work without internet.
+  await context.route('**/*',route=>new URL(route.request().url()).hostname==='127.0.0.1'?route.continue():route.abort());
+  // Exercise the LAN HTTP compatibility path even on trustworthy localhost.
+  await context.addInitScript(()=>{Object.defineProperty(crypto,'randomUUID',{value:undefined,writable:true,configurable:true});});
   const password=crypto.randomBytes(18).toString('base64url');
   await page.goto(url);await page.getByLabel('Nama akun',{exact:true}).fill('owner');await page.getByLabel('Kata sandi',{exact:true}).fill(password);await page.getByRole('button',{name:'Buat akun owner'}).click();
   await page.locator('#shell').waitFor({state:'visible'});
