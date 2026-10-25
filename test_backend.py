@@ -10,6 +10,7 @@ import subprocess
 import sys
 import tempfile
 import threading
+import time
 import unittest
 import backend as b
 
@@ -20,7 +21,16 @@ class RetailTests(unittest.TestCase):
         cls.server=b.ThreadingHTTPServer(('127.0.0.1',0),b.Handler); cls.port=cls.server.server_port
         cls.thread=threading.Thread(target=cls.server.serve_forever,daemon=True); cls.thread.start()
     @classmethod
-    def tearDownClass(cls): cls.server.shutdown(); cls.server.server_close(); cls.temp.cleanup()
+    def tearDownClass(cls):
+        # Windows keeps an SQLite file locked until every request thread exits.
+        cls.server.shutdown(); cls.thread.join(timeout=10); cls.server.server_close()
+        last=None
+        for _ in range(20):
+            try:
+                cls.temp.cleanup(); return
+            except PermissionError as error:
+                last=error; time.sleep(.1)
+        raise last
     def req(self,path,data=None,cookie=None,method=None):
         c=http.client.HTTPConnection('127.0.0.1',self.port); headers={'Content-Type':'application/json','X-Nilla-Request':'1'}
         if cookie: headers['Cookie']=cookie
