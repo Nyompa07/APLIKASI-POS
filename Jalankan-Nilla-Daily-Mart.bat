@@ -23,9 +23,7 @@ if %errorlevel%==0 (
   )
 )
 
-start "Nilla Daily Mart Server" /B %NILLA_PYTHON% backend.py
-timeout /t 2 /nobreak >nul
-start "" "http://127.0.0.1:4173"
+start "" /B cmd /c "timeout /t 2 /nobreak >nul ^& start http://127.0.0.1:4173"
 
 echo.
 echo Nilla Daily Mart sedang berjalan.
@@ -33,4 +31,4 @@ echo Browser seharusnya terbuka secara otomatis.
 echo Jangan tutup jendela ini selama aplikasi digunakan.
 echo Tekan Ctrl+C untuk menghentikan aplikasi setelah selesai.
 echo.
-%NILLA_PYTHON% -c "import time; time.sleep(2147483)"
+%NILLA_PYTHON% backend.py
