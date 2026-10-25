@@ -1,5 +1,15 @@
 # Hasil verifikasi — 25 Oktober 2026, Asia/Makassar
 
+## Revisi portable 0.3.0
+
+- Perbaikan Windows tanpa IANA timezone database: fallback Asia/Makassar UTC+8 untuk transaksi saat ini.
+- Runtime CPython 3.13.9 embedded x64 resmi disertakan; tidak mengunduh dependency di komputer pemakai.
+- Peluncur menguji scrypt, SQLite, aset, zona waktu dan respons HTTP sebelum membuka browser. Port bentrok menghasilkan pesan dan exit failure, bukan membuka aplikasi lain.
+- Mode lokal dapat digunakan tanpa internet. Mode LAN memerlukan owner sebelumnya; tidak berarti deployment internet publik atau sinkronisasi offline antar perangkat.
+- Builder memakai daftar berkas eksplisit dan verifikasi checksum runtime: tidak mengemas ZIP lama secara bersarang, data toko, atau cache.
+- `python3 test_launcher.py` menjalankan 4 tes launcher dan 14 tes backend pada database sementara.
+- Workflow `Windows portable verification` menguji runtime dari ZIP yang sama pada Windows. Status aktual dapat diperiksa di tab Actions GitHub; pemasangan workflow saja bukan bukti lulus.
+
 ## Dijalankan dan lulus
 
 - 14 integration tests HTTP (`python3 -m unittest -v test_backend`), database sementara per test. Semua selesai, tidak ada skipped.

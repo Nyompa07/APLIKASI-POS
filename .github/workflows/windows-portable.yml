@@ -1,0 +1,23 @@
+name: Windows portable verification
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  portable:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract the exact downloadable package
+        shell: pwsh
+        run: Expand-Archive -LiteralPath Nilla-Daily-Mart-v0.3.0-Portable-Windows-x64.zip -DestinationPath "$env:RUNNER_TEMP\Nilla package test"
+      - name: Verify packaged runtime, launcher and backend
+        shell: pwsh
+        run: |
+          Set-Location "$env:RUNNER_TEMP\Nilla package test\Nilla-Daily-Mart-v0.3.0"
+          & .\runtime\python.exe .\launch.py --check
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          & .\runtime\python.exe .\test_launcher.py
+          exit $LASTEXITCODE

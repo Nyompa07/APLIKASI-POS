@@ -1,0 +1,39 @@
+NILLA DAILY MART 0.3.0 - WINDOWS PORTABLE
+
+Untuk Windows 10/11 64-bit (x64).
+Tidak perlu memasang Python, Node.js atau mengunduh paket saat digunakan.
+
+1. Klik kanan ZIP, pilih Extract All / Ekstrak Semua.
+2. Buka folder hasil ekstrak. Jangan jalankan dari dalam tampilan ZIP.
+3. Klik dua kali MULAI-NILLA.bat.
+4. Ketik 1 lalu Enter. Browser dibuka setelah server siap.
+5. Buat akun owner ketika pertama kali digunakan.
+
+OFFLINE / ONLINE
+Mode 1 dapat digunakan tanpa internet dan tetap bekerja saat internet aktif.
+Semua aset aplikasi ada di paket; data disimpan di folder data.
+Mode 2 membagikan server komputer ini ke perangkat lain di Wi-Fi/LAN toko.
+Buat owner lewat mode 1 sebelum memakai mode 2. Komputer utama harus menyala.
+Mode LAN tidak berarti aplikasi sudah tersedia melalui internet publik.
+Jangan membuka port router untuk mode LAN HTTP. Akses luar toko perlu HTTPS.
+Jika perangkat kasir kehilangan hubungan ke server, pembayaran tidak dapat
+diproses sampai terhubung lagi. Belum ada sinkronisasi antar database offline.
+
+MENU SAAT BERJALAN
+B lalu Enter: buka browser lagi.
+Q lalu Enter: hentikan aplikasi. Data tidak dihapus.
+Jangan menutup server saat transaksi masih diproses.
+
+UPGRADE DARI VERSI LAMA
+Hentikan semua jendela Nilla. Cadangkan folder data lama.
+Ekstrak paket baru ke folder baru, lalu salin folder data lama ke folder baru.
+Jangan menimpa folder data yang sudah berisi data berbeda.
+Database lama didukung; paket tidak menyertakan atau mereset database toko.
+
+JIKA GAGAL
+Jendela akan tetap terbuka saat terjadi kesalahan. Kirim teks kesalahannya.
+Log peluncur ada di data/launcher.log. Jangan mengirim database pelanggan.
+Port sedang dipakai: tutup server Nilla lain dahulu.
+Paket tidak lengkap: ekstrak ulang seluruh ZIP, termasuk folder runtime.
+
+Rilis ini untuk evaluasi operasional. Batas fitur ada di README.md.

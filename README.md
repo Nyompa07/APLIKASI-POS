@@ -1,4 +1,20 @@
-# Nilla Daily Mart — implementasi inti v0.2
+# Nilla Daily Mart — portable v0.3.0
+
+## Unduh dan buka tanpa instalasi Python
+
+[Unduh paket portable Windows x64](https://github.com/Nyompa07/APLIKASI-POS/raw/main/Nilla-Daily-Mart-v0.3.0-Portable-Windows-x64.zip)
+
+Ekstrak seluruh ZIP, klik dua kali **MULAI-NILLA.bat**, lalu pilih **1**. Python resmi sudah berada dalam paket. Browser dibuka sesudah server lolos pemeriksaan kesiapan. Tidak memerlukan npm, pip atau koneksi internet saat digunakan. Pilih **B** untuk membuka browser lagi dan **Q** untuk berhenti.
+
+Windows 10/11 x64 diperlukan. Paket ini tidak ditujukan untuk Windows 32-bit, Android, atau macOS. Jangan menjalankan berkas dari dalam tampilan ZIP.
+
+### Offline dan jaringan
+
+- Mode 1 berjalan di komputer ini baik saat internet terputus maupun tersambung; seluruh aset dan database berada di perangkat.
+- Mode 2 membuka akses perangkat lain di Wi-Fi/LAN toko setelah owner dibuat melalui mode 1. Komputer server harus tetap menyala. Gunakan jaringan Private yang dipercaya karena koneksi LAN memakai HTTP.
+- Akses internet publik tetap memerlukan hosting/HTTPS. Mode LAN tidak otomatis membuat alamat publik. Perangkat yang kehilangan koneksi ke server belum dapat membuat transaksi offline lalu menyinkronkannya; fitur sinkronisasi tersebut belum tersedia.
+
+Untuk upgrade, hentikan server lama, cadangkan folder `data`, lalu salin folder tersebut ke hasil ekstrak baru. Jangan menimpa database berbeda. Paket tidak membawa data toko. Petunjuk sederhana tersedia di `BACA-DULU.txt`.
 
 Versi ini mengganti demo localStorage dengan aplikasi satu toko berbasis SQLite, API Python dan antarmuka sesuai peran. Tidak ada penjualan atau identitas pelanggan contoh di database operasional. Ini rilis evaluasi lokal, belum siap produksi dan belum mencakup seluruh master prompt.
 
@@ -7,11 +23,11 @@ Versi ini mengganti demo localStorage dengan aplikasi satu toko berbasis SQLite,
 ### Windows tanpa terminal
 
 1. Ekstrak ZIP ke folder biasa, misalnya `Documents\\Nilla-Daily-Mart-v0.2`.
-2. Klik dua kali `Jalankan-Nilla-Daily-Mart.bat`.
-3. Jika Windows meminta izin, pilih **Run**. Browser akan membuka aplikasi secara otomatis.
-4. Biarkan jendela hitam tetap terbuka selama aplikasi digunakan. Tekan `Ctrl+C` pada jendela tersebut saat selesai.
+2. Klik dua kali `MULAI-NILLA.bat`, pilih 1 lalu Enter.
+3. Browser akan membuka aplikasi setelah server siap. Jika gagal, baca pesan pada jendela peluncur.
+4. Biarkan jendela tetap terbuka selama aplikasi digunakan. Ketik Q lalu Enter saat selesai.
 
-Jika muncul pesan Python belum terpasang, instal Python 3 dari `python.org/downloads`. Saat memasang, centang **Add Python to PATH**, lalu klik berkas peluncur lagi.
+Folder `runtime` wajib tersedia dari paket portable. ZIP sumber otomatis GitHub tidak menyertakan folder runtime; gunakan tautan portable di atas.
 
 ### Terminal
 

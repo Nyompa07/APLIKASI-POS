@@ -1,14 +1,19 @@
 """Local retail API. Integer Rupiah, SQLite transactions, server-side permissions."""
 import hashlib, hmac, json, os, secrets, sqlite3, time
-from datetime import datetime
-from zoneinfo import ZoneInfo
+from datetime import datetime, timezone, timedelta
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse, parse_qs
 
 ROOT = Path(__file__).parent
 DB = Path(os.environ.get('NILLA_DB', ROOT / 'data/nilla.sqlite3'))
-TZ = ZoneInfo('Asia/Makassar')
+try:
+    TZ = ZoneInfo('Asia/Makassar')
+except ZoneInfoNotFoundError:
+    # Windows embedded Python has no IANA database. Makassar uses UTC+8,
+    # with no daylight-saving transitions for present-day transactions.
+    TZ = timezone(timedelta(hours=8), 'Asia/Makassar')
 ROLES = ('owner','manager','cashier','warehouse')
 OPS = ('owner','manager')
 POS = ('owner','manager','cashier')
@@ -232,7 +237,7 @@ class Handler(BaseHTTPRequestHandler):
                 size=int(self.headers.get('Content-Length','0')); require(0<size<=65536,'Ukuran permintaan tidak valid.'); d=json.loads(self.rfile.read(size)); require(isinstance(d,dict),'Objek JSON diperlukan.')
             db.execute('BEGIN IMMEDIATE' if method=='POST' else 'BEGIN')
             if path=='/api/status' and method=='GET':
-                result={'setup_required':not db.execute('SELECT 1 FROM users LIMIT 1').fetchone()}; db.commit(); return self.send(200,result)
+                result={'application':'nilla-daily-mart','version':'0.3.0','setup_required':not db.execute('SELECT 1 FROM users LIMIT 1').fetchone()}; db.commit(); return self.send(200,result)
             if path=='/api/setup' and method=='POST':
                 require(not db.execute('SELECT 1 FROM users LIMIT 1').fetchone(),'Owner sudah dibuat.',409); name=label(d.get('name'),60); password=label(d.get('password'),128); require(len(password)>=12,'Kata sandi minimal 12 karakter.'); salt=secrets.token_hex(16)
                 db.execute("INSERT INTO users(name,role,salt,hash) VALUES(?,'owner',?,?)",(name,salt,hashpw(password,salt))); audit(db,{'id':1},'owner.setup',{}); db.commit(); return self.send(201,{'ok':True})
