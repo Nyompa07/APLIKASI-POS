@@ -4,6 +4,17 @@ Versi ini mengganti demo localStorage dengan aplikasi satu toko berbasis SQLite,
 
 ## Jalankan
 
+### Windows tanpa terminal
+
+1. Ekstrak ZIP ke folder biasa, misalnya `Documents\\Nilla-Daily-Mart-v0.2`.
+2. Klik dua kali `Jalankan-Nilla-Daily-Mart.bat`.
+3. Jika Windows meminta izin, pilih **Run**. Browser akan membuka aplikasi secara otomatis.
+4. Biarkan jendela hitam tetap terbuka selama aplikasi digunakan. Tekan `Ctrl+C` pada jendela tersebut saat selesai.
+
+Jika muncul pesan Python belum terpasang, instal Python 3 dari `python.org/downloads`. Saat memasang, centang **Add Python to PATH**, lalu klik berkas peluncur lagi.
+
+### Terminal
+
 Prasyarat: Python 3.10+ beserta database zona waktu IANA (tersedia pada Linux environment ini). Node hanya diperlukan untuk menggunakan pintasan npm.
 
 ```sh
